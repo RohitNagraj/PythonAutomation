@@ -8,5 +8,5 @@ which has a particular value when there is no obstacle in that area, and if
 the value changes, the dino jumps.
 
 # Limitations
-This currently only works on a 1366x768 screen with the chrome tab in the
+This currently only works on Windows on a 1366x768 screen with the chrome tab in the
 left half of the screen.
