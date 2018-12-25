@@ -4,8 +4,9 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
-names = ['Ishank Sharma', 'Nimish Bongale', 'Vibhavari Rao', 'Riddhi Narayan', 'Rishabh Msrit']
-groupName = "2nd Year Devs"
+from GetContacts import names
+
+groupName = "Spam"
 
 chrome = webdriver.Chrome('D://chromedriver.exe')
 
@@ -24,7 +25,7 @@ newGroup.click()
 x_name = '//input[@class="_16RnB copyable-text selectable-text"]'
 nameField = wait.until(ec.presence_of_element_located((By.XPATH,x_name)))
 for i in names:
-    nameField.send_keys(i)
+    nameField.send_keys('A1' + i)
     nameField.send_keys(Keys.ENTER)
 
 

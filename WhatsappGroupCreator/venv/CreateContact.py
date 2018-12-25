@@ -1,23 +1,40 @@
-import httplib2
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+import time
 
-from googleapiclient.discovery import build
-from oauth2client.file import Storage
-from oauth2client.client import OAuth2WebServerFlow
-from oauth2client.tools import run_flow
+from GetContacts import phno,names
 
-FLOW = OAuth2WebServerFlow(
-    client_id='865447202877-5piktaelolal97db85irpiodf1o6ga64.apps.googleusercontent.com',
-    client_secret='E0BZdG_rL5d5MiPxNveWSPSN',
-    scope='https://www.googleapis.com/auth/contacts.readonly',
-    user_agent='YOUR_APPLICATION_NAME/YOUR_APPLICATION_VERSION')
+chrome = webdriver.Chrome('D://chromedriver.exe')
 
+wait = WebDriverWait(chrome,600)
 
-storage = Storage('client_secret.json')
-credentials = storage.get()
-if credentials is None or credentials.invalid == True:
-  credentials = run_flow(FLOW)
+chrome.get('https://contacts.google.com/?hl=en/')
 
-http = httplib2.Http()
-http = credentials.authorize(http)
+time.sleep(5.0)
 
-people_service = build(serviceName='people', version='v1', http=http)
+for i in range(len(names)):
+    x_new_contact = '//button[@title="Add new contact"]'
+    new_contact = wait.until(ec.presence_of_element_located((By.XPATH, x_new_contact)))
+    new_contact.click()
+
+    x_name = '//input[@aria-label="First name"]'
+    name = wait.until(ec.presence_of_element_located((By.XPATH, x_name)))
+    name.send_keys("A1" + names[i])
+
+    x_ph = '//input[@aria-label="Phone"]'
+    ph = wait.until(ec.presence_of_element_located((By.XPATH, x_ph)))
+    ph.send_keys(phno[i])
+
+    x_save = '//button[@jsname="x8hlje"]'
+    save = chrome.find_element_by_xpath(x_save)
+    save.click()
+
+    time.sleep(1.5)
+    x_close = '#yDmH0d > div.llhEMd.iWO5td > div > div.g3VIld.G2PfHe.Up8vH.Whe8ub.hFEqNb.J9Nfi.iWO5td > content > div > div.KEUMte > div > div.bLQjSd.mBvP5e > div:nth-child(4) > svg > path:nth-child(2)'
+    close = chrome.find_element_by_css_selector(x_close)
+    close.click()
+
+    time.sleep(1)
