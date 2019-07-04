@@ -51,7 +51,7 @@ for i in range(1, 150):
 
     # Takes captcha as input from user in the first iteration
     if i == 1:
-        temp = input()
+        temp = input("Enter captcha: ")
     captcha.send_keys(temp)
 
     go = wait.until(ec.presence_of_element_located((By.XPATH, x_go)))
