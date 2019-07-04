@@ -40,18 +40,13 @@ for i in range(1, 150):
 
     # Change your USNs for your banch and year accordingly
     usn = wait.until(ec.presence_of_element_located((By.XPATH, x_usn)))
-    if (i < 10):
-        usn.send_keys("1MS17IS00" + str(i))
-    elif i < 100:
-        usn.send_keys("1MS17IS0" + str(i))
-    else:
-        usn.send_keys("1MS17IS" + str(i))
+    usn.send_keys("1MS17IS" + str(i).zfill(3))
 
     captcha = wait.until(ec.presence_of_element_located((By.XPATH, x_captcha)))
 
     # Takes captcha as input from user in the first iteration
     if i == 1:
-        temp = input()
+        temp = input("Enter Captcha: ")
     captcha.send_keys(temp)
 
     go = wait.until(ec.presence_of_element_located((By.XPATH, x_go)))
