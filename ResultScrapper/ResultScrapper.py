@@ -36,7 +36,7 @@ x_cgpa = '//*[@id="main"]/div/table/tbody/tr[11]/td/table/tbody/tr/td[2]/table/t
 f = open("Results.txt", "a")
 
 # The range is the USN range
-for i in range(1, 150):
+for i in range(137, 150):
 
     # Change your USNs for your banch and year accordingly
     usn = wait.until(ec.presence_of_element_located((By.XPATH, x_usn)))
@@ -45,7 +45,7 @@ for i in range(1, 150):
     captcha = wait.until(ec.presence_of_element_located((By.XPATH, x_captcha)))
 
     # Takes captcha as input from user in the first iteration
-    if i == 1:
+    if i == 137:
         temp = input("Enter Captcha: ")
     captcha.send_keys(temp)
 
